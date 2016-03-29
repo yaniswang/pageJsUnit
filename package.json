@@ -1,0 +1,34 @@
+{
+  "name": "pagejsunit",
+  "version": "1.0.0",
+  "description": "Run jsunit by webdriver.",
+  "main": "lib/pageJsUnit",
+  "dependencies": {
+    "escodegen": "1.8.0",
+    "esprima": "2.7.2",
+    "jwebdriver": "1.0.2",
+    "node-jscover": "0.6.12",
+    "pageproxy": "1.0.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yaniswang/pageJsUnit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yaniswang/pageJsUnit/issues"
+  },
+  "keywords": [
+    "jsunit",
+    "webdriver",
+    "mocha",
+    "qunit",
+    "nodejs",
+    "javascript"
+  ],
+  "engines": {
+    "node": ">=4.x.x"
+  },
+  "author": "Yanis Wang",
+  "license": "MIT"
+}
