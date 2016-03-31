@@ -28,7 +28,7 @@ Async demo:
     var PageJsUnit = require('pagejsunit');
 
     PageJsUnit.run({
-        wdHosts: '127.0.0.1',
+        wdHost: '127.0.0.1',
         wdPort: '4444',
         url: 'http://127.0.0.1/test/mocha.html',
         browserName: 'chrome',
@@ -66,7 +66,7 @@ Sync demo:
 
     co(function*(){
         var result = PageJsUnit.run({
-            wdHosts: '127.0.0.1',
+            wdHost: '127.0.0.1',
             wdPort: '4444',
             url: 'http://127.0.0.1/test/mocha.html',
             browserName: 'chrome',
