@@ -55,8 +55,9 @@ return result:
             "summary": {...}, 
             "events": [...]
         }, 
-        "jsCoverage": {
-            "http://127.0.0.1/test/src/Array.js": {...}
+        "coverResult": {
+            "summary": {...}, 
+            "files": [...]
         }
     }
 
