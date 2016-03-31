@@ -33,7 +33,7 @@
             'type': 'testEnd',
             'title' : message.name,
             'status' :  status,
-            'elapsed' : message.runtime
+            'duration' : message.runtime
         };
         if(status === 'failed'){
             objEvent.errors = arrMessages.join('\r\n\r\n');
@@ -56,10 +56,10 @@
     QUnit.done = function(message) {
         PageJsUnit.endTest({
             'summary': {
-                'specCount': specCount,
-                'failedCount': failedCount,
-                'passedCount': passedCount,
-                'elapsed': message.runtime
+                'all': specCount,
+                'failed': failedCount,
+                'passed': passedCount,
+                'duration': message.runtime
             },
             'events': arrEvents
         });

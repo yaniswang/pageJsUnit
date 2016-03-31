@@ -30,7 +30,7 @@
                 'type': 'testEnd',
                 'title': spec.description,
                 'status': status,
-                'elapsed': new Date().getTime() - specStartTime
+                'duration': new Date().getTime() - specStartTime
             };
             if(status === 'failed'){
                 failedCount ++;
@@ -55,13 +55,13 @@
             });
         },
         jasmineDone: function(){
-            var elapsed = new Date().getTime() - runnerStartTime;
+            var duration = new Date().getTime() - runnerStartTime;
             PageJsUnit.endTest({
                 'summary': {
-                    'specCount': specCount,
-                    'failedCount': failedCount,
-                    'passedCount': passedCount,
-                    'elapsed': elapsed
+                    'all': specCount,
+                    'failed': failedCount,
+                    'passed': passedCount,
+                    'duration': duration
                 },
                 'events': arrEvents
             });

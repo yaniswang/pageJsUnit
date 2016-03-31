@@ -9,7 +9,7 @@
 
     var arrConsole = [];
     var testResult = {};
-    var jsCoverage = {};
+    var coverResult = {};
 
     PageJsUnit.addConsole = function(type, message){
         arrConsole.push({
@@ -22,7 +22,7 @@
         testResult = result;
         var $jscoverage = window._$jscoverage;
         if($jscoverage){
-            jsCoverage = processJsCoverageData($jscoverage);
+            coverResult = processJsCoverageData($jscoverage);
         }
         isEnd = true;
         execEndCallback();
@@ -39,7 +39,7 @@
         var objResults = {
             console: arrConsole,
             testResult: testResult,
-            jsCoverage: jsCoverage
+            coverResult: coverResult
         };
         for(var i=0,l=arrEndCallbacks.length;i<l;i++){
             arrEndCallbacks[i](objResults);
@@ -47,13 +47,32 @@
     }
 
     function processJsCoverageData(jsCoverageData){
+        var allLineCount = 0, coveredLineCount = 0;
+        var allBranchCount = 0, coveredBranchCount = 0;
+        var allFunctionCount = 0, coveredFunctionCount = 0;
+        var fileInfo;
         for(var file in jsCoverageData){
-            var branchData = jsCoverageData[file].branchData;
+            fileInfo = jsCoverageData[file];
+            var lineData = fileInfo.lineData;
+            for(var line in lineData){
+                allLineCount ++;
+                if(lineData[line] > 0){
+                    coveredLineCount ++;
+                }
+            }
+            var branchData = fileInfo.branchData;
             for (var lineNumber in branchData) {
                 var conditions = branchData[lineNumber];
                 for (var conditionIndex = 0; conditionIndex < conditions.length; conditionIndex++) {
+                    allBranchCount += 2;
                     var branchObject = conditions[conditionIndex];
                     if(branchObject){
+                        if(branchObject.evalFalse > 0){
+                            coveredBranchCount ++;
+                        }
+                        if(branchObject.evalTrue > 0){
+                            coveredBranchCount ++;
+                        }
                         branchObject.covered = branchObject.covered();
                         branchObject.message = branchObject.message();
                         branchObject.pathsCovered = branchObject.pathsCovered();
@@ -63,8 +82,34 @@
                     }
                 }
             }
+            var functionData = fileInfo.functionData;
+            for(var id in functionData){
+                allFunctionCount ++;
+                if(functionData[id] > 0){
+                    coveredFunctionCount ++;
+                }
+            }
         }
-        return jsCoverageData;
+        var lineRatio = allLineCount > 0 ? (coveredLineCount/allLineCount*100).toFixed(2): 0;
+        var branchRatio = allBranchCount > 0 ? (coveredBranchCount/allBranchCount*100).toFixed(2): 0;
+        var functionRatio = allFunctionCount > 0 ? (coveredFunctionCount/allFunctionCount*100).toFixed(2): 0;
+        var newJsCoverageData = {
+            summary: {
+                lineCount: allLineCount,
+                lineCovered: coveredLineCount,
+                lineRatio: lineRatio,
+
+                branchCount: allBranchCount,
+                branchCovered: coveredBranchCount,
+                branchRatio: branchRatio,
+
+                functionCount: allFunctionCount,
+                functionCovered: coveredFunctionCount,
+                functionRatio: functionRatio
+            },
+            files: jsCoverageData
+        };
+        return newJsCoverageData;
     }
 
     win.PageJsUnit = PageJsUnit;

@@ -54,7 +54,7 @@
                 'type': 'testEnd',
                 'title': test.title,
                 'status': status,
-                'elapsed': test.duration,
+                'duration': test.duration,
                 'speed': test.speed
             };
             if(status === 'failed'){
@@ -72,13 +72,13 @@
         });
 
         runner.on('end', function() {
-            var elapsed = new Date().getTime() - runnerStartTime;
+            var duration = new Date().getTime() - runnerStartTime;
             PageJsUnit.endTest({
                 'summary': {
-                    'specCount': specCount,
-                    'failedCount': failedCount,
-                    'passedCount': passedCount,
-                    'elapsed': elapsed
+                    'all': specCount,
+                    'failed': failedCount,
+                    'passed': passedCount,
+                    'duration': duration
                 },
                 'events': arrEvents
             });
