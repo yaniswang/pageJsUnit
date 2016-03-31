@@ -64,9 +64,9 @@
             for (var lineNumber in branchData) {
                 var conditions = branchData[lineNumber];
                 for (var conditionIndex = 0; conditionIndex < conditions.length; conditionIndex++) {
-                    allBranchCount += 2;
                     var branchObject = conditions[conditionIndex];
                     if(branchObject){
+                        allBranchCount += 2;
                         if(branchObject.evalFalse > 0){
                             coveredBranchCount ++;
                         }
