@@ -90,9 +90,9 @@
                 }
             }
         }
-        var lineRatio = allLineCount > 0 ? (coveredLineCount/allLineCount*100).toFixed(2): 0;
-        var branchRatio = allBranchCount > 0 ? (coveredBranchCount/allBranchCount*100).toFixed(2): 0;
-        var functionRatio = allFunctionCount > 0 ? (coveredFunctionCount/allFunctionCount*100).toFixed(2): 0;
+        var lineRatio = allLineCount > 0 ? getFix(coveredLineCount/allLineCount*100): 0;
+        var branchRatio = allBranchCount > 0 ? getFix(coveredBranchCount/allBranchCount*100): 0;
+        var functionRatio = allFunctionCount > 0 ? getFix(coveredFunctionCount/allFunctionCount*100): 0;
         var newJsCoverageData = {
             summary: {
                 lineCount: allLineCount,
@@ -110,6 +110,10 @@
             files: jsCoverageData
         };
         return newJsCoverageData;
+    }
+
+    function getFix(num){
+        return Math.round(num*100)/100;
     }
 
     win.PageJsUnit = PageJsUnit;
