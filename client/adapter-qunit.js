@@ -55,6 +55,7 @@
     }
     QUnit.done = function(message) {
         PageJsUnit.endTest({
+            'type': 'qunit',
             'summary': {
                 'all': specCount,
                 'failed': failedCount,

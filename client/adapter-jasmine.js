@@ -57,6 +57,7 @@
         jasmineDone: function(){
             var duration = new Date().getTime() - runnerStartTime;
             PageJsUnit.endTest({
+                'type': 'jasmine',
                 'summary': {
                     'all': specCount,
                     'failed': failedCount,

@@ -74,6 +74,7 @@
         runner.on('end', function() {
             var duration = new Date().getTime() - runnerStartTime;
             PageJsUnit.endTest({
+                'type': 'mocha',
                 'summary': {
                     'all': specCount,
                     'failed': failedCount,
