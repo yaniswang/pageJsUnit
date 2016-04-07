@@ -36,7 +36,8 @@ Async demo:
         coverageInclude: [ /\/src\//i ],
         coverageExclude: [],
         coverageBeautify: false,
-        hosts: '127.0.0.1 www.google.com'
+        hosts: '127.0.0.1 www.google.com',
+        timeout: 30000 // default: 60000 ms
     }, function(error, result){
         console.log(error, result)
     });
