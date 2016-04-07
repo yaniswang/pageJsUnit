@@ -83,9 +83,11 @@
                 }
             }
             var functionData = fileInfo.functionData;
+            var fnHits;
+            allFunctionCount += functionData.length;
             for(var id in functionData){
-                allFunctionCount ++;
-                if(functionData[id] > 0){
+                fnHits = functionData[id];
+                if(fnHits && fnHits > 0){
                     coveredFunctionCount ++;
                 }
             }
