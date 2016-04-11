@@ -1,8 +1,8 @@
 {
   "name": "pagejsunit",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Run jsunit by webdriver.",
-  "main": "lib/pageJsUnit",
+  "main": "lib/pagejsunit",
   "dependencies": {
     "escodegen": "1.8.0",
     "esprima": "2.7.2",
