@@ -108,6 +108,11 @@
                 }
             }
             newFileInfo.functionData = functionData;
+            // source
+            var fileSource = fileInfo.source;
+            if(fileSource){
+                newFileInfo.source = fileSource;
+            }
             newJsCoverageData[file] = newFileInfo;
         }
         var lineRatio = allLineCount > 0 ? getFix(coveredLineCount/allLineCount*100): 0;

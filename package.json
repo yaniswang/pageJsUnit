@@ -1,6 +1,6 @@
 {
   "name": "pagejsunit",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Run jsunit by webdriver.",
   "main": "lib/pagejsunit",
   "dependencies": {
