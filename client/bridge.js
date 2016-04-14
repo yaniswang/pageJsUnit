@@ -51,8 +51,13 @@
         var allBranchCount = 0, coveredBranchCount = 0;
         var allFunctionCount = 0, coveredFunctionCount = 0;
         var fileInfo;
+        var newJsCoverageData = {};
+        var newFileInfo;
+        var newBranchData;
         for(var file in jsCoverageData){
             fileInfo = jsCoverageData[file];
+            newFileInfo = {};
+            // line data
             var lineData = fileInfo.lineData;
             for(var line in lineData){
                 allLineCount ++;
@@ -60,12 +65,17 @@
                     coveredLineCount ++;
                 }
             }
+            newFileInfo.lineData = lineData;
+            // branch data
             var branchData = fileInfo.branchData;
+            newBranchData = {};
             for (var lineNumber in branchData) {
+                var arrConditions = [];
                 var conditions = branchData[lineNumber];
                 for (var conditionIndex = 0; conditionIndex < conditions.length; conditionIndex++) {
                     var branchObject = conditions[conditionIndex];
                     if(branchObject){
+                        var newBranchObject = {};
                         allBranchCount += 2;
                         if(branchObject.evalFalse > 0){
                             coveredBranchCount ++;
@@ -73,15 +83,21 @@
                         if(branchObject.evalTrue > 0){
                             coveredBranchCount ++;
                         }
-                        branchObject.covered = branchObject.covered();
-                        branchObject.message = branchObject.message();
-                        branchObject.pathsCovered = branchObject.pathsCovered();
-                        delete branchObject['init'];
-                        delete branchObject['toJSON'];
-                        delete branchObject['ranCondition'];
+                        newBranchObject.evalFalse = branchObject.evalFalse;
+                        newBranchObject.evalTrue = branchObject.evalTrue;
+                        newBranchObject.nodeLength = branchObject.nodeLength;
+                        newBranchObject.position = branchObject.position;
+                        newBranchObject.src = branchObject.src;
+                        newBranchObject.covered = branchObject.covered();
+                        newBranchObject.message = branchObject.message();
+                        newBranchObject.pathsCovered = branchObject.pathsCovered();
+                        arrConditions[conditionIndex] = newBranchObject;
                     }
                 }
+                newBranchData[lineNumber] = arrConditions;
             }
+            newFileInfo.branchData = newBranchData;
+            // function data
             var functionData = fileInfo.functionData;
             var fnHits;
             allFunctionCount += functionData.length;
@@ -91,11 +107,13 @@
                     coveredFunctionCount ++;
                 }
             }
+            newFileInfo.functionData = functionData;
+            newJsCoverageData[file] = newFileInfo;
         }
         var lineRatio = allLineCount > 0 ? getFix(coveredLineCount/allLineCount*100): 0;
         var branchRatio = allBranchCount > 0 ? getFix(coveredBranchCount/allBranchCount*100): 0;
         var functionRatio = allFunctionCount > 0 ? getFix(coveredFunctionCount/allFunctionCount*100): 0;
-        var newJsCoverageData = {
+        return {
             summary: {
                 lineCount: allLineCount,
                 lineCovered: coveredLineCount,
@@ -109,9 +127,8 @@
                 functionCovered: coveredFunctionCount,
                 functionRatio: functionRatio
             },
-            files: jsCoverageData
+            files: newJsCoverageData
         };
-        return newJsCoverageData;
     }
 
     function getFix(num){
