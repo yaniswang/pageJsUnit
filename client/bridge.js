@@ -24,7 +24,7 @@
     PageJsUnit.endTest = function(result){
         testResult = result;
         if(rawConsoleLog && win.JSON){
-            rawConsoleLog(JSON.stringify(result, null, 4));
+            rawConsoleLog.call(console, JSON.stringify(result, null, 4));
         }
         var $jscoverage = window._$jscoverage;
         if($jscoverage){
