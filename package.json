@@ -1,6 +1,6 @@
 {
   "name": "pagejsunit",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Run jsunit by webdriver.",
   "main": "lib/pagejsunit",
   "dependencies": {
@@ -8,7 +8,7 @@
     "esprima": "2.7.2",
     "jwebdriver": "1.0.2",
     "node-jscover": "0.6.12",
-    "pageproxy": "1.0.1"
+    "pageproxy": "1.0.2"
   },
   "devDependencies": {},
   "repository": {
