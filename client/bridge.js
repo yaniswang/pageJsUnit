@@ -2,6 +2,9 @@
     if(win.PageJsUnit){
         return;
     }
+    
+    var rawConsoleLog = win.console && win.console.log;
+
     var PageJsUnit = {};
     
     var isEnd = false;
@@ -20,6 +23,9 @@
 
     PageJsUnit.endTest = function(result){
         testResult = result;
+        if(rawConsoleLog && win.JSON){
+            rawConsoleLog(JSON.stringify(result, null, 4));
+        }
         var $jscoverage = window._$jscoverage;
         if($jscoverage){
             coverResult = processJsCoverageData($jscoverage);
