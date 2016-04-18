@@ -8,7 +8,7 @@
     "esprima": "2.7.2",
     "jwebdriver": "1.0.2",
     "node-jscover": "0.6.12",
-    "pageproxy": "1.0.2"
+    "pageproxy": "1.0.3"
   },
   "devDependencies": {},
   "repository": {
